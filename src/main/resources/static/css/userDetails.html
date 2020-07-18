@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+input[type=text] {
+/*   width: 130px; */
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+.main_card {
+	color: #fff;
+	width: 450px;
+	height: 300px;
+	margin: 100px auto;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	max-width: 770px;
+	background: #00C9FF; 
+	background: -webkit-linear-gradient(to right, #92FE9D, #00C9FF);
+	background: -webkit-gradient(linear, left top, right top, from(#92FE9D), to(#00C9FF));
+	background: -webkit-linear-gradient(left, #92FE9D, #00C9FF);
+	background: -o-linear-gradient(left, #92FE9D, #00C9FF);
+	background: linear-gradient(to right, #92FE9D, #00C9FF); 
+	-webkit-box-shadow: 0 0 40px rgba(0,0,0,0.3); 
+	        box-shadow: 0 0 40px rgba(0,0,0,0.3);
+}
+
+.card_left {
+	width: 90%;
+}
+
+.card_datails {
+	width: 80%;
+	padding: 30px;
+	margin-top: -25px;
+}
+.card_datails  h1 {
+	font-size: 30px;
+}
+.card_right img {
+	height: 390px;
+	border-radius: 2px;
+}
+.card_right {
+	border-radius: 2px;
+}
+
+.card_cat {
+	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+}
+
+.PG, .year, .genre, .time {
+	color: fff;
+	padding: 10px;
+	font-weight: bold;
+	border-radius: 15px;
+}
+
+.PG {
+	background: #92FE9D;
+	-webkit-box-shadow: 0 0 50px rgba(0,0,0,0.1);
+	        box-shadow: 0 0 50px rgba(0,0,0,0.1);
+	-webkit-transition: 300ms ease-in-out;
+}
+
+.disc {
+	font-weight: 100;
+	line-height: 27px;
+}
+a {
+	color: darkcyan;
+	display: block;
+	text-decoration: none;
+}
+.social-btn {
+	margin-left: -10px;
+}
+button {
+	color: #fff;
+	border: none;
+	padding: 20px;
+	outline: none;
+	font-size: 12px;
+	margin-top: 30px;
+	margin-left: 10px;
+	background: #92FE9D;
+	border-radius: 12px;
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	-webkit-transition: 300ms ease-in-out;
+	-o-transition: 200ms ease-in-out;
+	transition: 200ms ease-in-out;
+}
+
+button:hover {
+	-webkit-transform: scale(1.1);
+	    -ms-transform: scale(1.1);
+	        transform: scale(1.1);
+}
+.play_btn {
+	height: 100%;
+	margin: -394px auto;
+	position: relative;
+	text-align: center;
+	background: rgba(0, 244, 170,0.4);
+	box-shadow: 0 0 50px rgba(0,0,0,0.2);
+}
+.fa-play-circle {
+	color: #255;
+	font-size: 160px;
+	margin-top: 110px;
+	-webkit-animation: bounce 1.0s -0.4s infinite;
+	        animation: bounce 1.0s -0.4s infinite;
+}
+
+.fa-play-circle:hover {
+	color: aqua;
+	animation: bounce 0.4s infinite;
+}
+@-webkit-keyframes bounce {
+  8% {
+    transform: scale(0.3);
+    -webkit-transform: scale(0.8);
+    opacity: 1;
+  }
+  10% {
+    transform: scale(1.8);
+    -webkit-transform: scale2);
+    opacity: 0;
+		}
+}
+
+@keyframes bounce {
+  8% {
+    transform: scale(0.3);
+    -webkit-transform: scale(0.8);
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1.8);
+    -webkit-transform: scale2);
+    opacity: 0;
+		}
+}
+
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd){background-color: #e67e22}
+
+th {
+/*   background-color: #4CAF50; */
+  background-color: #e67e22;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+	<div class="main_card">
+		<div class="card_left">
+			<div class="card_datails" ng-repeat="movie in movieDetails>
+				<h1>{{movie.name}}</h1>
+				<div class="card_cat">
+					<p class="year">{{movie.year}}</p>
+					<p class="genre">{{movie.genre}}</p>
+					<p class="time">{{movie.time}}</p>
+					<p class="time">{{movie.rating}}</p>
+				</div>
+				<p class="disc">{{movie.description}}</p>
+		</div>
+	</div>
+</body>
+</html>

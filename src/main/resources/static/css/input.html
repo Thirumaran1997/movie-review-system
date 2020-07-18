@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="css/input.css">
+<div class="wrapper" style="margin-top:16px; margin-left:16px">
+  <form>
+    <h1 style="position:fixed; top:4px;">Add Customer</h1>
+    <div class="group" style="margin-left:400px">
+      <label>First Name</label>
+      <input type="text" ng-model="detail.firstname" placeholder="First name" class="fillpage" required="required"/><span class="highlight"></span><span class="bar"></span>
+    </div>
+    <div class="group" style="margin-left:400px">
+      <label>Last Name</label>
+      <input type="text" placeholder="Last name" ng-model="detail.lastname" class="fillpage" required="required"/><span class="highlight"></span><span class="bar"></span>
+    </div>
+    <div class="group" style="margin-left:400px">
+      <label>Age</label>
+      <input type="number" placeholder="Age of individual" ng-model="detail.age" class="fillpage" required="required"/><span class="highlight"></span><span class="bar"></span>
+    </div>
+    <div class="group" style="margin-left:400px">
+      <label>Scheme</label>
+      <input type="text" placeholder="Policy insured" ng-model="detail.scheme" class="fillpage" required="required"/><span class="highlight"></span><span class="bar"></span>
+    </div>
+    <div class="group" style="margin-left:400px">
+      <label>Payment due</label>
+      <input type="text" placeholder="Date of next payment" ng-model="detail.paydue" class="fillpage" required="required"/><span class="highlight"></span><span class="bar"></span>
+    </div>
+    <div class="group" style="margin-left:400px">
+      <label>Amount per month</label>
+      <input type="text" placeholder="Payment due per month" ng-model="detail.paypermonth" class="fillpage" required="required"/><span class="highlight fillpage"></span><span class="bar"></span>
+    </div>
+    <div class="group" style="margin-left:400px">
+      <label>Comments</label>
+      <textarea type="textarea" placeholder="Add comments here...." ng-model="detail.comments" rows="5" class="fillpage" required="required"></textarea><span class="highlight"></span><span class="bar"></span>
+    </div>
+        <div class="btn-box" style="margin-left:1178px; position:fixed; top:-10px;">
+      <button class="btn btn-success" type="submit" ng-show="isInsertMode" ng-click="insertRecords()">Submit</button>
+      <button class="btn btn-warning" type="submit" ng-show="isUpdateMode" ng-click="updateRecords()">Update</button>
+      <button class="btn btn-cancel btn-danger" ng-click="onCancel()" type="button">Cancel</button>
+    </div>
+  </form>
+</div>
