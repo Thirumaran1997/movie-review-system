@@ -2,6 +2,7 @@ package com.moviewreview.springboot.web.controller;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -36,20 +37,17 @@ public class IndexController {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value="/postData", method = RequestMethod.POST)
-	public ResponseEntity postData(@RequestBody String headers,HttpServletRequest request) throws MalformedURLException, IllegalArgumentException, IOException, FeedException{
-		Map userDetailMap = new Gson().fromJson(headers, Map.class);
-		Map<String,Object> headerMap = (Map<String, Object>) userDetailMap.get("headers");
-		String city = (String) headerMap.get("cityname");
-//		boolean postMessage = service.postRssData(city);
-		Map<String,Object> returnMap = new HashMap<>();
+	@RequestMapping(value="/insert", method = RequestMethod.POST)
+	public ResponseEntity postData(@RequestBody String movieDetails,HttpServletRequest request) throws MalformedURLException, IllegalArgumentException, IOException, FeedException{
+		Map userDetailMap = new Gson().fromJson(movieDetails, Map.class);
+		Map<String, Object> returnMap = service.postData(userDetailMap);
 		return new ResponseEntity(returnMap, HttpStatus.OK);
 	}
 	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value="/validateUser", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity validateUser(HttpServletRequest request) throws ClassNotFoundException {
+	public ResponseEntity validateUser(HttpServletRequest request) {
 		Map recordMap = new HashMap<>();
 		Map paramMap = new HashMap<>();
 		Enumeration headerNames = request.getHeaderNames();
@@ -66,5 +64,12 @@ public class IndexController {
 		return new ResponseEntity(returnMap, HttpStatus.OK);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value="/getMovieDetails", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity getMovieDetails(HttpServletRequest request) throws SQLException {
+		Map<String,Object> returnMap = service.getMovieList();
+		return new ResponseEntity(returnMap, HttpStatus.OK);
+	}
 	
 }

@@ -49,13 +49,11 @@ integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0Vx
 			</div>
 		</div>
 	</div>
-	<div class="row">
 	<div class="col-md-offset-3 col-md-3" ng-show="showUserDetails"></div>
 	<div ng-show="showUserDetails" ng-include="'css/userDetails.html'"></div>
 	<div ng-show="showAdminDetails" ng-include="'css/userDetails.html'"></div>
-	</div>
 	<div class="row">
-	<div class="col" style="margin-top:16px; margin:left:400px;" ng-show="inputUserDetails" ng-include="'css/input.html'"></div>
+	<div class="col" style="margin-top:16px; margin:left:400px;" ng-show="isInsertMode" ng-include="'css/input.html'"></div>
 	</div>
 	<script>var App = angular.module('app',[]);</script>
 	<script src="js/movieService.js"></script>

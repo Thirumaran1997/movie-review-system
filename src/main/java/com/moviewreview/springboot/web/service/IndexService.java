@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,6 +68,12 @@ public class IndexService {
 		}
 		return returnMap;
 	}
+	
+	public Map<String, Object> getMovieList() throws SQLException {
+		Connection conn = initialiseConnection();
+		Map<String,Object> returnMap = new HashMap<>();
+		return getMoviesList(conn,returnMap);
+	}
 
 	private Map<String, Object> getMoviesList(Connection conn, Map<String, Object> returnMap) throws SQLException {
 		PreparedStatement st = conn.prepareStatement("Select * from movie_data");
@@ -79,6 +86,8 @@ public class IndexService {
 			movie.setRating(rs.getString("rating"));
 			movie.setTime(rs.getString("time"));
 			movie.setYear(rs.getString("year"));
+			movie.setDescription(rs.getString("description"));
+			movie.setId(rs.getString("id"));
 			movieList.add(movie);
 		}
 		returnMap.put("movieList", movieList);
@@ -98,6 +107,75 @@ public class IndexService {
 			commentList.add(comment);
 		}
 		returnMap.put("commentsList", commentList);
+		return returnMap;
+	}
+
+	public Map<String, Object> postData(Map userDetailMap) {
+		Connection conn = initialiseConnection();
+		Map<String,Object> returnMap = new HashMap<>();
+		returnMap.put("status","fail");
+		try {
+			PreparedStatement st = conn.prepareStatement("Insert into movie_data (name,year,genre,time,rating,description) values (?,?,?,?,?,?)");
+			st.setString(1, (String) userDetailMap.get("name"));
+			st.setString(2, (String)(userDetailMap.get("year")));
+			st.setString(3, (String) userDetailMap.get("genre"));
+			st.setString(4, (String) userDetailMap.get("time"));
+			st.setString(5, (String) userDetailMap.get("rating"));
+			st.setString(6, (String) userDetailMap.get("description"));
+			int status = st.executeUpdate();
+			returnMap.put("status","pass");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returnMap;
+	}
+	
+	public Map<String, Object> updateUserDetails(Map userDetailMap) throws SQLException {
+		Map<String,Object> returnMap = new HashMap<>();
+		returnMap.put("status", "fail");
+		Connection conn = initialiseConnection();
+		Statement stmt = conn.createStatement();
+		String userId = (String)(userDetailMap.get("id"));
+		String name = (String) userDetailMap.get("name");
+		String year = (String) userDetailMap.get("year");
+		String genre = (String) (userDetailMap.get("genre"));
+		String time = (String) userDetailMap.get("time");
+		String rating = (String) userDetailMap.get("rating");
+		String description = (String) userDetailMap.get("description");
+		PreparedStatement st;
+		try {
+			st = conn.prepareStatement("update movie_data set name = ? , year = ? , genre = ? , time = ? , rating = ? , description = ? where id = ? ");
+			st.setString(1, name);
+			st.setString(2, year);
+			st.setString(3, genre);
+			st.setString(4, time);
+			st.setString(5, rating);
+			st.setString(6, description);
+			st.setString(7, userId);
+			st.executeUpdate();
+			returnMap.put("status", "pass");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return returnMap;
+	}
+
+	public Map<String, Object> deleteUserDetails(Map userDetailMap) throws SQLException {
+		Map<String,Object> returnMap = new HashMap<>();
+		returnMap.put("status", "fail");
+		Connection conn = initialiseConnection();
+		Statement stmt = conn.createStatement();
+		String userId = (String)(userDetailMap.get("id"));
+		PreparedStatement st;
+		try {
+			st = conn.prepareStatement("delete from movie_data where id = ? ");
+			st.setString(1, userId);
+			st.executeUpdate();
+			returnMap.put("status", "pass");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return returnMap;
 	}
 }
